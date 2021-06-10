@@ -42,6 +42,7 @@ const signInUser = async (req, res, next) => {
 			user: {
 				id: exist.id,
 				name: exist.fullname,
+				contact_number: exist.contact_number,
 				username: exist.username,
 				token: token,
 			},

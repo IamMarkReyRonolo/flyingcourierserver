@@ -3,7 +3,7 @@ const auth = require("../controller/auth");
 const branchController = require("../controller/branchController");
 const router = express.Router();
 
-router.get("/all", auth.authenticate, branchController.getAllBranch);
+router.get("/all", branchController.getAllBranch);
 
 router.get("/:branch_id", branchController.getSpecificBranch);
 

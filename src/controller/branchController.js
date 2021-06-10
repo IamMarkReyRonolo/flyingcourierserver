@@ -2,9 +2,7 @@ const models = require("../models");
 
 const getAllBranch = async (req, res, next) => {
 	try {
-		const branch = await models.Branch.findAll({
-			where: { adminId: req.user },
-		});
+		const branch = await models.Branch.findAll({ include: models.Order });
 		res.status(200).json(branch);
 	} catch (error) {
 		next(error);
