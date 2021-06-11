@@ -90,6 +90,16 @@ const createOrder = async (req, res, next) => {
 
 const updateOrder = async (req, res, next) => {
 	try {
+		const branch = await models.Branch.findOne({
+			where: { branch_location: req.body.branch_location },
+		});
+
+		if (!branch) {
+			const error = new Error("Not Found");
+			error.status = 404;
+			next(error);
+		}
+
 		const data = {
 			order_type: req.body.order_type,
 			order_baggage: req.body.order_baggage,
@@ -99,6 +109,7 @@ const updateOrder = async (req, res, next) => {
 			sender_contact: req.body.sender_contact,
 			receiver: req.body.receiver,
 			receiver_contact: req.body.receiver_contact,
+			branchId: branch.id,
 		};
 
 		const update = await models.Order.update(data, {
